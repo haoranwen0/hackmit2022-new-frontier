@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hackmit2022newfronti-dev-134040-authRole",
+      "UnauthRoleArn": "arn:aws:iam::062943963762:role/amplify-hackmit2022newfronti-dev-134040-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::062943963762:role/amplify-hackmit2022newfronti-dev-134040-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-hackmit2022newfronti-dev-134040-deployment",
+      "UnauthRoleName": "amplify-hackmit2022newfronti-dev-134040-unauthRole",
+      "StackName": "amplify-hackmit2022newfronti-dev-134040",
+      "StackId": "arn:aws:cloudformation:us-east-1:062943963762:stack/amplify-hackmit2022newfronti-dev-134040/2c0b6ff0-41b0-11ed-8f08-120ed9d998f7",
+      "AmplifyAppId": "dmeyq9on8mkp8"
+    }
+  }
+}
