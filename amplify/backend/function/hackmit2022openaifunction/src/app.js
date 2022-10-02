@@ -9,8 +9,13 @@ See the License for the specific language governing permissions and limitations 
 const express = require("express");
 const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
-const awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
+const deepai = require("deepai");
+var fs = require("fs");
+var request = require("request");
+const deepaiApiKey = require("./apiKey.js");
 
+const awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
+deepai.setApiKey(deepaiApiKey);
 // declare a new express app
 const app = express();
 app.use(bodyParser.json());
@@ -27,8 +32,32 @@ app.use(function (req, res, next) {
  * Example get method *
  **********************/
 
+var download = function (uri, filename, callback) {
+  request.head(uri, function (err, res, body) {
+    console.log("content-type:", res.headers["content-type"]);
+    console.log("content-length:", res.headers["content-length"]);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
+  });
+};
+
 app.get("/openai", async function (req, res) {
   const { apiKey, question } = req.query;
+
+  if (question.toLowerCase().includes("image")) {
+    try {
+      var result = await deepai.callStandardApi("text2img", {
+        text: question,
+      });
+      console.log(result);
+      download(result.output_url, "result_image.png", function () {
+        console.log("done");
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    return;
+  }
 
   console.log(apiKey, question);
 

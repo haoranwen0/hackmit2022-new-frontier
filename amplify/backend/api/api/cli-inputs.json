@@ -7,13 +7,6 @@
       "permissions": {
         "setting": "open"
       }
-    },
-    "/deepai": {
-      "name": "/deepai",
-      "lambdaFunction": "hackmit2022deepaifunction",
-      "permissions": {
-        "setting": "open"
-      }
     }
   }
 }

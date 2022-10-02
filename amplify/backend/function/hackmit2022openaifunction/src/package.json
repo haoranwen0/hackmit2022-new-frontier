@@ -7,8 +7,11 @@
   "dependencies": {
     "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.17.1",
+    "deepai": "^1.0.21",
     "express": "^4.15.2",
-    "openai": "^3.0.0"
+    "fs": "^0.0.1-security",
+    "openai": "^3.0.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.92"

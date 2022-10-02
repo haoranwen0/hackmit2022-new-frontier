@@ -28,14 +28,6 @@
             "Name",
             "Arn"
           ]
-        },
-        {
-          "category": "function",
-          "resourceName": "hackmit2022deepaifunction",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
         }
       ]
     }
