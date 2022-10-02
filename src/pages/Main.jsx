@@ -67,12 +67,55 @@ const Main = () => {
   };
 
   const onCreate = async () => {
-    if (question.toLowerCase().includes("image")) {
-      console.log("Image!");
+    if (apiKey.trim() === "") {
+      alert("Missing API Key");
       return;
     }
-
     updateLoading((prevState) => !prevState);
+    if (
+      question.toLowerCase().includes("image") ||
+      question.toLowerCase().includes("photo") ||
+      question.toLowerCase().includes("picture")
+    ) {
+      try {
+        const res = await API.get("api", "/openai", {
+          queryStringParameters: {
+            question,
+          },
+        });
+        console.log(res);
+        var image = `<img src=${res.data.output_url} style="border-radius: 8px; user-select: none; object-fit: contain; width: 350px;" />`;
+        console.log(image);
+        updateElements((prevState) => [
+          ...prevState,
+          {
+            id: uniqid(),
+            query: question,
+            data: image,
+            position: {
+              top: 0,
+              left: 0,
+            },
+          },
+        ]);
+        // console.log(res);
+        // const res =
+        //   "https://api.deepai.org/job-view-file/9ce06ce3-f995-41df-8f67-ad11d6572da4/outputs/output.jpg";
+        // var canvas = document.getElementById("mycanvas");
+        // const context = canvas.getContext("2d");
+        // var image = new Image();
+        // image.src = res;
+        // image.onload = function () {
+        //   context.drawImage(image, 0, 0, 256, 256, 0, 0, 256, 256);
+        // };
+        // console.log(canvas.outerHTML);
+        // console.log(canvas.innerHTL);
+      } catch (e) {
+        console.log(e);
+      }
+      updateLoading((prevState) => !prevState);
+      return;
+    }
     const res = await API.get("api", "/openai", {
       queryStringParameters: {
         apiKey,
@@ -140,7 +183,7 @@ const Main = () => {
       >
         <div className="mb-4 pb-4 px-4">
           <h1 className="font-bold">NLP Web Builder</h1>
-          <span className="text-sm">Powered by OpenAI GPT-3</span>
+          <span className="text-sm">Powered by OpenAI + DeepAI</span>
         </div>
         <div className="overflow-auto px-4 mb-4">
           <DragDropContext onDragEnd={onDragEnd}>

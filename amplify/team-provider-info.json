@@ -19,7 +19,13 @@
         },
         "hackmit2022openaifunction": {
           "deploymentBucketName": "amplify-hackmit2022newfronti-dev-134040-deployment",
-          "s3Key": "amplify-builds/hackmit2022openaifunction-4731636b45644c457041-build.zip"
+          "s3Key": "amplify-builds/hackmit2022openaifunction-7450686f4c367a615951-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dmeyq9on8mkp8",
+          "type": "manual"
         }
       }
     }

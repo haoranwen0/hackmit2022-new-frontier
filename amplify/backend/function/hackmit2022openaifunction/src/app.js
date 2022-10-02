@@ -7,6 +7,7 @@ See the License for the specific language governing permissions and limitations 
 */
 
 const express = require("express");
+var gpt3examples = require("./gpt3examples.js");
 const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
 const deepai = require("deepai");
@@ -42,17 +43,24 @@ var download = function (uri, filename, callback) {
 };
 
 app.get("/openai", async function (req, res) {
-  const { apiKey, question } = req.query;
+  const { apiKey, question, temperature } = req.query;
+  const examples = gpt3examples.gpt3examples;
 
-  if (question.toLowerCase().includes("image")) {
+  if (
+    question.toLowerCase().includes("image") ||
+    question.toLowerCase().includes("photo") ||
+    question.toLowerCase().includes("picture")
+  ) {
     try {
       var result = await deepai.callStandardApi("text2img", {
         text: question,
       });
       console.log(result);
-      download(result.output_url, "result_image.png", function () {
-        console.log("done");
-      });
+      res.json({ status: "Success", data: result, image: true });
+
+      // download(result.output_url, "result_image.png", function () {
+      //   console.log("done");
+      // });
     } catch (e) {
       console.log(e);
     }
@@ -73,17 +81,17 @@ app.get("/openai", async function (req, res) {
       question,
       documents: [],
       examples_context: "Plain english to html css code",
-      examples: [
-        [
-          "Hello world button",
-          `<button style="padding: 8px 12px; background-color: #f3f4f6; outline: none; border: 1px solid #d1d5db; border-radius: 4px;">Hello World</button>`,
-        ],
-      ],
+      examples,
       max_tokens: 250,
+      temperature: parseFloat(temperature),
       stop: ["\n", "<|endoftext|>"],
     });
     console.log(response.data.answers[0]);
-    res.json({ status: "Success", data: response.data.answers[0] });
+    res.json({
+      status: "Success",
+      data: response.data.answers[0],
+      image: false,
+    });
   } catch (e) {
     console.log(e.message);
     res.json({ status: "Error", error: e });
