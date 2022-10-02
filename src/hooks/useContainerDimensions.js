@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function useContainerDimensions(containerId) {
+export default function useContainerDimensions(containerId, controlClosed) {
   const [containerSize, setContainerSize] = React.useState({
     width: 0,
     height: 0,
@@ -13,7 +13,7 @@ export default function useContainerDimensions(containerId) {
       window.removeEventListener("resize", updateContainerDimensions);
     };
     //eslint-disable-next-line
-  }, []);
+  }, [controlClosed]);
 
   const updateContainerDimensions = () => {
     setContainerSize({

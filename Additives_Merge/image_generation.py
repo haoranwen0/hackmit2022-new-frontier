@@ -18,10 +18,10 @@ r = requests.post(
 image_url = r.json()['output_url']
 
 # Saves image file
-image_file = urllib.request.urlretrieve(image_url, "requested-image.jpg")
+image_file = urllib.request.urlretrieve(image_url, "./requested-image.jpg")
 
 # Crops and saves a quadrant of generated images
-image = Image.open('requested-image.jpg')
+image = Image.open('./requested-image.jpg')
 
 width, height = image.size
 left = 0
@@ -30,13 +30,13 @@ top = 0
 bottom = height/2
 
 image_cropped = image.crop((left,top,right,bottom))
-image_cropped = image_cropped.save('return_image.jpg')
+image_cropped = image_cropped.save('./return_image.jpg')
 
 # Writes image as a base64 type, returns a string and writes base64 data to encode.bin
-with open('return_image.jpg',"rb") as image2string:
+with open('./return_image.jpg',"rb") as image2string:
     b64_string = base64.b64encode(image2string.read())
 
-with open('encode.bin',"wb") as file:
+with open('./encode.bin',"wb") as file:
     file.write(b64_string)
 
 

@@ -9,6 +9,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "hackmit2022deepaifunction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "api": {
@@ -19,6 +24,14 @@
         {
           "category": "function",
           "resourceName": "hackmit2022openaifunction",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "hackmit2022deepaifunction",
           "attributes": [
             "Name",
             "Arn"

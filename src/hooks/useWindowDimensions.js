@@ -1,9 +1,9 @@
 import React from "react";
 import useContainerDimensions from "./useContainerDimensions";
 
-export default function useWindowDimensions() {
+export default function useWindowDimensions(controlClosed) {
   const [windowSize, setWindowSize] = React.useState({ width: 0, height: 0 });
-  const containerSize = useContainerDimensions("tool-container");
+  const containerSize = useContainerDimensions("tool-container", controlClosed);
 
   React.useEffect(() => {
     undateWindowDimensions();

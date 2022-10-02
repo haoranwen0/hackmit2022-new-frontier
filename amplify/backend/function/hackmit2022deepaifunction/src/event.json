@@ -1,0 +1,7 @@
+{
+  "httpMethod": "GET",
+  "path": "/deepai",
+  "queryStringParameters": {
+    "question": "image of pink elephant playing cards"
+  }
+}
