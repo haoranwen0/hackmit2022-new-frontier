@@ -10,6 +10,18 @@
       "StackName": "amplify-hackmit2022newfronti-dev-134040",
       "StackId": "arn:aws:cloudformation:us-east-1:062943963762:stack/amplify-hackmit2022newfronti-dev-134040/2c0b6ff0-41b0-11ed-8f08-120ed9d998f7",
       "AmplifyAppId": "dmeyq9on8mkp8"
+    },
+    "categories": {
+      "function": {
+        "openaiFunction": {
+          "deploymentBucketName": "amplify-hackmit2022newfronti-dev-134040-deployment",
+          "s3Key": "amplify-builds/openaiFunction-3659746867544c385855-build.zip"
+        },
+        "hackmit2022openaifunction": {
+          "deploymentBucketName": "amplify-hackmit2022newfronti-dev-134040-deployment",
+          "s3Key": "amplify-builds/hackmit2022openaifunction-4731636b45644c457041-build.zip"
+        }
+      }
     }
   }
 }

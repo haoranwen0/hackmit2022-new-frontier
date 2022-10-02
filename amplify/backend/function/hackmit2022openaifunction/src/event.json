@@ -1,0 +1,8 @@
+{
+  "httpMethod": "GET",
+  "path": "/openai",
+  "queryStringParameters": {
+    "apiKey": "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",
+    "question": "Hello world button"
+  }
+}

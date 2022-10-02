@@ -3,7 +3,7 @@
   "paths": {
     "/openai": {
       "name": "/openai",
-      "lambdaFunction": "openaiFunction",
+      "lambdaFunction": "hackmit2022openaifunction",
       "permissions": {
         "setting": "open"
       }

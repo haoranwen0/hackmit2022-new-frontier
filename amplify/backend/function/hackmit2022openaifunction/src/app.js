@@ -8,6 +8,7 @@ See the License for the specific language governing permissions and limitations 
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const { Configuration, OpenAIApi } = require("openai");
 const awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
 
 // declare a new express app
@@ -26,9 +27,38 @@ app.use(function (req, res, next) {
  * Example get method *
  **********************/
 
-app.get("/openai", function (req, res) {
-  // Add your code here
-  res.json({ success: "get call succeed!", url: req.url });
+app.get("/openai", async function (req, res) {
+  const { apiKey, question } = req.query;
+
+  console.log(apiKey, question);
+
+  const configuration = new Configuration({
+    apiKey,
+  });
+  const openai = new OpenAIApi(configuration);
+
+  try {
+    const response = await openai.createAnswer({
+      // search_model: "ada",
+      model: "curie",
+      question,
+      documents: [],
+      examples_context: "Plain english to html css code",
+      examples: [
+        [
+          "Hello world button",
+          `<button style="padding: 8px 12px; background-color: #f3f4f6; outline: none; border: 1px solid #d1d5db; border-radius: 4px;">Hello World</button>`,
+        ],
+      ],
+      max_tokens: 250,
+      stop: ["\n", "<|endoftext|>"],
+    });
+    console.log(response.data.answers[0]);
+    res.json({ status: "Success", data: response.data.answers[0] });
+  } catch (e) {
+    console.log(e.message);
+    res.json({ status: "Error", error: e });
+  }
 });
 
 app.get("/openai/*", function (req, res) {
