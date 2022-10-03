@@ -114,6 +114,7 @@ const Main = () => {
         console.log(e);
       }
       updateLoading((prevState) => !prevState);
+      setCreateMenuIsOpen(false);
       return;
     }
     const res = await API.get("api", "/openai", {
